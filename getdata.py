@@ -30,7 +30,7 @@ if __name__ == '__main__':
     process_num = process_d + process_ping
     pool = multiprocessing.Pool(processes = process_num)
 
-    t = multiprocessing.Process( target = ddate_recording ,args = ("ddata",))
+    t = multiprocessing.Process( target = ddate_recording ,args = (("ddata",), ))
     t.daemon = True
     t.start()
 
