@@ -44,7 +44,7 @@ def ddata_recording(args):
         while True:
             count = 0
             for document in os.listdir( workdir ): 
-                f = open( os.path.join(datadir,document) ,"a+" )
+                f = open( datafile + '/' + document) ,"a+" )
                 path = os.path.join( workdir , document )
                 t = time.strftime("%m-%d %H:%M:%S", time.localtime())
                 nowsize[count] , rate = cal( path , presize[count] )
