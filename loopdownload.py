@@ -36,7 +36,7 @@ def download_loop(link,filename):
     try:
         while True:
             print("Start downloading...%s\nfilename=%s\n" % (link,filename))
-            call( "you-get -d " + link + ".html" +" -o " + filename, shell=True)
+            call( "you-get -d " + link  +" -o " + filename, shell=True)
             time.sleep(10)         
             clean(filename)
     except:
