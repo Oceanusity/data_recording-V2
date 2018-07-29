@@ -1,0 +1,5 @@
+一个指令运行
+python getdata pingdata ddata（两个参数，第一个是ping数据存的文件夹，后一个是rate存的文件夹，都应是dir！）
+ping的参数放在当前目录的pinglist.txt中，每行前一个是域名，后一个是数据放的文件路径
+download的参数放在当前目录的dlist.txt中，每一行前一个是要下载的视频的网址，后一个是该视频的存储位置（需放在tmp文件夹中相应的文件夹下如 tmp/youku）
+下载速率数据存储在当前目录的ddata文件夹中。
