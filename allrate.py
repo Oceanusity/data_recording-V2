@@ -25,7 +25,7 @@ def cal(path,pre):
 def ddata_recording(args):
 
     datafile = ""
-    if len(args) == 0
+    if len(args) == 0 :
         print("missing parameter")
         exit()
     datafile = args[0]
@@ -44,11 +44,11 @@ def ddata_recording(args):
         while True:
             count = 0
             for document in os.listdir( workdir ): 
-                f = open( datafile + '/' + document) ,"a+" )
+                f = open( datafile + '/' + document ,"a+" )
                 path = os.path.join( workdir , document )
                 t = time.strftime("%m-%d %H:%M:%S", time.localtime())
                 nowsize[count] , rate = cal( path , presize[count] )
-                if rate != 0 
+                if rate != 0 :
                     f.write(t + "\n")
                     f.write( document + ":" + str( rate ) + "\n")
                     f.close()
