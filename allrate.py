@@ -29,7 +29,7 @@ def ddata_recording(args):
         print("missing parameter")
         exit()
     datafile = args[0]
-    workdir = os.path.join(os.getcwd(),"/tmp") #can be changed to input by keyboard
+    workdir = os.path.join(os.getcwd(),"./tmp") #can be changed to input by keyboard
     datadir = os.path.join(os.getcwd(),datafile)
 
     presize = [0 for x in range(0, 20)]
