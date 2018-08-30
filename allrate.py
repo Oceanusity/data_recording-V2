@@ -48,7 +48,7 @@ def ddata_recording(args):
                 path = os.path.join( workdir , document )
                 t = time.strftime("%m-%d %H:%M:%S", time.localtime())
                 nowsize[count] , rate = cal( path , presize[count] )
-                if rate != 0 :
+                if rate > 0 :   #no minus speed here
                     f.write(t + "\n")
                     f.write( document + ":" + str( rate ) + "\n")
                     f.close()
