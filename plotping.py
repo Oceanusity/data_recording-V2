@@ -16,14 +16,15 @@ def ave_speed(scale,tmp_x_time,tmp_y_data,x_time,y_data):
     return True
 
 def read_data(doc,begin_time,end_time):
-    pattern_delaytime_str = 'time=\d{1,2}.\d+' #delay_time below 100 ms
-    pattern_delaytime_num = '\d{1,2}.\d+'
-    pattern_datetime = '(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sept|Oct|Nov|Dec) ([0-2]\d|3[0-1]) ([0-1]\d|2[0-4]):[0-6]\d:\d{2}'
+    pattern_delaytime_str = 'time=(([0-2]\d)|3[0-5]).\d+' #delay_time below 100 ms
+    pattern_delaytime_num = '(([0-2]\d)|3[0-5]).\d+'
+    pattern_datetime = '(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sept|Oct|Nov|Dec)\s+([1-9]|[1-2]\d|3[0-1])\s+([0-1]\d|2[0-4]):[0-6]\d:\d{2}'
     bool = 0
     tmp_x_time = []
     tmp_y_data = []
     with open(doc,'r') as f:
         tmp_data = []
+        tmp_str = ""
         for line in f.readlines():
             if bool == 0:
                 if re.search(pattern_datetime,line):
@@ -44,9 +45,11 @@ def read_data(doc,begin_time,end_time):
                                 delay = tmp_data.pop()
                                 sum += delay
                                 num += 1
-                            average = sum / num
-                            tmp_x_time.append(tmp_time)   
-                            tmp_y_data.append(average)
+                            if num != 0 :             #in the vitual machine in this computer, it need to update
+                                average = sum / num
+                                if average < 35:
+                                    tmp_x_time.append(tmp_time)   
+                                    tmp_y_data.append(average)
                     else:
                         bool = 0
                         continue
@@ -55,7 +58,7 @@ def read_data(doc,begin_time,end_time):
 if __name__ == '__main__':
 
     if len(sys.argv) < 6:
-        print("missing parameters \n example : python plotping.py pingdata 7-03 10:30:00 7-04 11:40:00")
+        print("missing parameters \n example : python plotping.py pingdata 7-03 10:30:00 7-04 11:40:00") # the 0 in day is required
         exit()
     #judge the right formation of datetime 
     doc = sys.argv[1]
@@ -81,6 +84,6 @@ if __name__ == '__main__':
     #plt.gca().xaxis.set_minor_formatter(minor_fmt)
     #the former two lines is not need
     plt.xlim(begin_time,end_time)
-    plt.scatter(tmp_x_time,tmp_y_data)
+    plt.scatter(tmp_x_time,tmp_y_data,s=1,alpha=0.5)
     plt.gcf().autofmt_xdate()  # rotate the locator
     plt.show()    
